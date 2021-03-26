@@ -1,0 +1,52 @@
+body{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.header{
+    border-bottom: solid black 5px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+form{
+    border: solid black 2px;
+    margin: 10px;
+    width: 270px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.inputs{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+label, input, a{
+    margin: 5px;
+}
+.buttons{
+    align-self: flex-end;
+}
+li{
+    color: red;
+}
+
+.categories{
+    width: 270px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.checkboxes{
+    display: flex;
+}
+.boxes{
+    display: flex;
+    flex-direction: column;
+    padding-top: 5px;
+}
+.labels{
+    display: flex;
+    flex-direction: column;
+}

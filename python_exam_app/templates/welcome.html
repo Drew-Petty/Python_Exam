@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/Welcome.css' %}">
+</head>
+<body>
+    <h1>Welcome! Sign in to mange your jobs!</h1>
+    <div class="forms">
+        <form action="register" method="POST">
+            {% csrf_token %}
+            <h1>Register</h1>
+            <div class="inputs">
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name">
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name">
+                <label for="email">Email</label>
+                <input type="text" name="email">
+                <label for="password">Password</label>
+                <input type="password" name="password">
+                <label for="pw_confirm">Confirm PW</label>
+                <input type="password" name="pw_confirm">
+            </div>
+            <input type="submit" value="Register">
+        </form>
+        <form action="login" method="POST">
+            {% csrf_token %}
+            <h1>Sign In</h1>
+            <div class="inputs">
+                <label for="email">Email</label>
+                <input type="text" name="email">
+                <label for="password">Password</label>
+                <input type="password" name="password">
+            </div>
+            <input type="submit" value="Sign In">
+        </form>
+    </div>
+    {% if messages %}
+        <ul class="errors">
+            {% for message in messages %}
+                <li {% if message.tags %} class ="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

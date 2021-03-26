@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Job</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/addedit.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>Hello {{ user.first_name }}! Create a Job!</h1>
+        <div>
+            <a href="/dashboard">Return to Dashboard</a>
+            <a href="/logout">Log Out</a>
+        </div>
+    </div>
+    {% if messages %}
+        <ul class="errors">
+            {% for message in messages %}
+                <li {% if message.tags %} class ="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form action="addjob" method="POST">
+        {% csrf_token %}
+        <div class="inputs">
+            <label for="title">Title:</label>
+            <input type="text" name='title'>
+            <label for="desc">Description:</label>
+            <input type="text" name="desc">
+            <label for="location">Location:</label>
+            <input type="text" name="location">
+        </div>
+        <div class="categories">
+            <h4>Category:</h4>
+            <div class="checkboxes">
+            <div class="boxes">
+                <input type="checkbox" name='lawncare'> 
+                <input type="checkbox" name='housekeeping'>
+                <input type="checkbox" name='pet_watching'>
+            </div>
+            <div class="labels">
+                <label for="lawncare">Lawncare</label>
+                <label for="housekeeping">House Keeping</label>
+                <label for="pet_watching">Pet Watching</label>
+            </div>
+            </div>
+        </div>
+        <div class="inputs">
+            <label for="other">Other:</label>
+            <input type="text" name='other'>
+        </div>
+        <div class="buttons">
+            <a href="dashboard">Cancel</a>
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</body>
+</html>

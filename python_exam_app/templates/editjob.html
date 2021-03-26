@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Job</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/addedit.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>Hello {{ user.first_name }}! Let's edit your Job!</h1>
+        <div>
+            <a href="/dashboard">Return to Dashboard</a>
+            <a href="logout">Log Out</a>
+        </div>
+    </div>
+    {% if messages %}
+        <ul class="errors">
+            {% for message in messages %}
+                <li {% if message.tags %} class ="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form action="/makechange/{{ job.id }}" method="POST">
+        {% csrf_token %}
+        <div class="inputs">
+            <label for="title">Title:</label>
+            <input type="text" name='title'value='{{ job.title }}' >
+            <label for="desc">Description:</label>
+            <input type="text" name="desc" value="{{ job.desc }}">
+            <label for="location">Location:</label>
+            <input type="text" name="location" value="{{ job.location }}">
+        </div>
+        <div class="buttons">
+            <a href="/dashboard">Cancel</a>
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</body>
+</html>

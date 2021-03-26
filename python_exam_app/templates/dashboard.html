@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handy Helper Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>Hello {{ user.first_name }}!</h1>
+        <div>
+            <a href="logout">Log Out</a>
+            <a href="newjob">New job!</a>
+        </div>
+    </div>
+    {% if jobs %}
+    <h3>Everyone's jobs:</h3>
+    <table>
+        <tr>
+            <th>Job</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+        {% for job in jobs %}
+        <tr>
+            <td>{{ job.title }}</td>
+            <td>{{ job.location }}</td>
+            <td>
+                <a href="jobs/{{ job.id }}">View</a>
+                {% if user.id == job.created_by.id %}
+                    | <a href="destroy/{{ job.id }}">Remove</a> 
+                    | <a href="jobs/edit/{{ job.id }}">Edit</a>
+                {% endif %}
+                {% if job.performed_by.count < 1 %}
+                | <a href="/assign/{{ job.id }}">Add</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    {% if user.my_jobs.count > 0 %}
+    <h3>{{ user.first_name }}'s jobs</h3>
+    <table>
+        <tr>
+            <th>Job</th>
+            <th>Actions</th>
+        </tr>
+        {% for job in user.my_jobs.all %}
+            <tr>
+                <td>{{ job.title }}</td>
+                <td>
+                    <a href="jobs/{{ job.id }}">View</a>
+                    | <a href="destroy/{{ job.id }}">Done</a>
+                    | <a href="quit/{{ job.id }}">Give up</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

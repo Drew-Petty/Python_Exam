@@ -1,0 +1,18 @@
+body{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.header{
+    border-bottom: solid black 5px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.details{
+    border: black 2px solid;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+a{
+    margin: 5px;
+}
